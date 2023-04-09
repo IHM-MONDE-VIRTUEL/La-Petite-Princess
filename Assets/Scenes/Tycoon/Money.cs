@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 public class Money
 {
-    private static string[] units = new string[] { "", "K", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc", "UDc", "DDc", "TDc", "QaDc", "QiDc", "SxDc", "SpDc", "ODc", "NDc", "Vg", "UVg", "DVg", "TVg", "QaVg", "QiVg", "SxVg", "SpVg", "OVg", "NVg", "Tg", "UTg", "DTg", "TTg", "QaTg", "QiTg", "SxTg", "SpTg", "OTg", "NTg", "Qd", "UQd", "DQd", "TQd", "QaQd", "QiQd", "SxQd", "SpQd", "OQd", "NQd", "Qq", "UQq", "DQq", "TQq", "QaQq", "QiQq", "SxQq", "SpQq", "OQq", "NQq", "Sx", "USx", "DSx", "TSx", "QaSx", "QiSx", "SxSx", "SpSx", "OSx", "NSx", "Sp", "USp", "DSp", "TSp", "QaSp", "QiSp", "SxSp", "SpSp", "OSp", "NSp", "Og", "UOg", "DOg", "TOg", "QaOg", "QiOg", "SxOg", "SpOg", "OOg", "NOg", "Nn", "UNn", "DNn", "TNn", "QaNn", "QiNn", "SxNn", "SpNn", "ONn", "NNn", "Ce" };
-    private static double unitDiff = 10 ^ 3;
+    public static string[] units = new string[] { "", "K", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc", "UDc", "DDc", "TDc", "QaDc", "QiDc", "SxDc", "SpDc", "ODc", "NDc", "Vg", "UVg", "DVg", "TVg", "QaVg", "QiVg", "SxVg", "SpVg", "OVg", "NVg", "Tg", "UTg", "DTg", "TTg", "QaTg", "QiTg", "SxTg", "SpTg", "OTg", "NTg", "Qd", "UQd", "DQd", "TQd", "QaQd", "QiQd", "SxQd", "SpQd", "OQd", "NQd", "Qq", "UQq", "DQq", "TQq", "QaQq", "QiQq", "SxQq", "SpQq", "OQq", "NQq", "Sx", "USx", "DSx", "TSx", "QaSx", "QiSx", "SxSx", "SpSx", "OSx", "NSx", "Sp", "USp", "DSp", "TSp", "QaSp", "QiSp", "SxSp", "SpSp", "OSp", "NSp", "Og", "UOg", "DOg", "TOg", "QaOg", "QiOg", "SxOg", "SpOg", "OOg", "NOg", "Nn", "UNn", "DNn", "TNn", "QaNn", "QiNn", "SxNn", "SpNn", "ONn", "NNn", "Ce" };
+    private static double unitDiff = 1000;
     private static string currency = "€";
 
     private double value;
@@ -23,6 +24,9 @@ public class Money
 
     public Money(double value, int unit)
     {
+        if (unit < 0) throw new ArgumentOutOfRangeException("unit", "Unit must be positive");
+        if (value < 0) throw new ArgumentOutOfRangeException("value", "Value must be positive");
+
         this.value = value;
         this.unit = unit;
 
@@ -31,16 +35,17 @@ public class Money
 
     private void Normalize()
     {
-        while (this.value >= Money.unitDiff)
-        {
-            this.value /= Money.unitDiff;
-            this.unit++;
-        }
-        while (this.value < 1 && this.unit > 0)
+        while (this.value < 1.0 / Money.unitDiff && this.unit > 0)
         {
             this.value *= Money.unitDiff;
             this.unit--;
         }
+        while (this.value >= Money.unitDiff && this.unit < Money.units.Length - 1)
+        {
+            this.value /= Money.unitDiff;
+            this.unit++;
+        }
+        if (this.value >= Money.unitDiff) this.value = Money.unitDiff - 1;
     }
 
     public double GetValue()
@@ -66,11 +71,11 @@ public class Money
         }
         else if (a.unit < b.unit)
         {
-            return new Money(a.value + b.value * Money.unitDiff * (b.unit - a.unit), a.unit);
+            return new Money(a.value + b.value * Math.Pow(Money.unitDiff, (b.unit - a.unit)), a.unit);
         }
         else
         {
-            return new Money(a.value * Money.unitDiff * (a.unit - b.unit) + b.value, b.unit);
+            return new Money(a.value * Math.Pow(Money.unitDiff, (a.unit - b.unit)) + b.value, b.unit);
         }
     }
 
@@ -82,11 +87,11 @@ public class Money
         }
         else if (a.unit < b.unit)
         {
-            return new Money(a.value - b.value * Money.unitDiff * (b.unit - a.unit), a.unit);
+            return new Money(a.value - b.value * Math.Pow(Money.unitDiff, (b.unit - a.unit)), a.unit);
         }
         else
         {
-            return new Money(a.value * Money.unitDiff * (a.unit - b.unit) - b.value, b.unit);
+            return new Money(a.value * Math.Pow(Money.unitDiff, (a.unit - b.unit)) - b.value, b.unit);
         }
     }
 
@@ -151,20 +156,5 @@ public class Money
     public override int GetHashCode()
     {
         return this.value.GetHashCode() ^ this.unit.GetHashCode();
-    }
-
-    public static Money Parse(string s)
-    {
-        try
-        {
-            double value = int.Parse(s);
-            s = s.Replace(value.ToString(), "");
-            return new Money(value, Array.IndexOf(Money.units, s));
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-            return new Money();
-        }
     }
 }

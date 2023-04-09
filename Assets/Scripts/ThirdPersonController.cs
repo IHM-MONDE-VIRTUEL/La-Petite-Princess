@@ -75,6 +75,9 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        [Tooltip("For enabling the camera to be moved on right click")]
+        public bool EnableCameraMovementOnRightClick = false;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
