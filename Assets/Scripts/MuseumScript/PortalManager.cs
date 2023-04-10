@@ -45,8 +45,9 @@ public class PortalManager : MonoBehaviour
         if (allTriggersVisited && other.gameObject.tag == "Player")
         {
             // Load the next scene
-            Debug.Log("Triggerrr");
+            Debug.Log("Triggerrr " + SceneManager.GetActiveScene().buildIndex);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Debug.Log("after load scene " + SceneManager.GetActiveScene().buildIndex);
         }
     }
     

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpacePortalManager : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class SpacePortalManager : MonoBehaviour
         {
             // Load the next scene
             Debug.Log("Triggerrr");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
     
