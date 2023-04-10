@@ -69,7 +69,7 @@ public class Upgrade : MonoBehaviour
             element.Q<ProgressBar>("Progress").value = progress;
             element.Q<ProgressBar>("Progress").title = progress + "%";
 
-            Debug.Log("Progress: " + progress);
+            element.Q<Label>("Price").text = "0€";
         };
 
         listView.itemsSource = this.upgrades.upgradeNames;

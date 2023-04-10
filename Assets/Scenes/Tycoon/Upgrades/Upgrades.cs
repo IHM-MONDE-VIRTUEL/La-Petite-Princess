@@ -67,7 +67,7 @@ public class Upgrades : MonoBehaviour
         if (this.upgradeLevels[upgradeName] < this.upgradeLevelsCount) this.upgradeLevels[upgradeName]++;
 
         // if all upgrades are bought, upgrade the object
-        if (this.upgradeLevels.Values.All(level => level == this.upgradeLevelsCount))
+        if (this.upgradeLevels.Values.All(level => level == this.upgradeLevelsCount) && this.upgradeIndex < this.upgrades.Count - 1)
         {
             // reset upgrade levels
             this.upgradeLevels.Keys.ToList().ForEach(key => this.upgradeLevels[key] = 0);
