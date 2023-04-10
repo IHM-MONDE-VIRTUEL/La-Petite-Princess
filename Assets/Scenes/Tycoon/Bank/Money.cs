@@ -28,6 +28,10 @@ public class Money
         this.Normalize();
     }
 
+    public Money(Money money) : this(money.value, money.unit)
+    {
+    }
+
     private void Normalize()
     {
         while (this.value < 1.0 / Money.unitDiff && this.unit > 0)

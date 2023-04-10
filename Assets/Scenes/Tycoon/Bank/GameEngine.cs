@@ -124,10 +124,9 @@ public class GameEngine : MonoBehaviour
             if (this.wallet >= this.target) value = 1;
             else
             {
-                float percentage = (float)(this.wallet / this.target);
-                if (percentage == float.PositiveInfinity || percentage < 0) value = 0;
+                value = (float)(this.wallet / this.target);
+                if (value == float.PositiveInfinity || value < 0) value = 0;
             }
-            Debug.Log(value * 100 + "%" + " " + this.wallet + " " + this.target);
             this.progressBar.value = value * 100;
         }
     }
@@ -135,5 +134,30 @@ public class GameEngine : MonoBehaviour
     public void updateRateUI()
     {
         this.rateTextElement.text = this.rate.ToString() + "/s";
+    }
+
+    public Money getTarget()
+    {
+        return new Money(this.target);
+    }
+
+    public Money getBank()
+    {
+        return new Money(this.bank);
+    }
+
+    public Money getWallet()
+    {
+        return new Money(this.wallet);
+    }
+
+    public Money getRate()
+    {
+        return new Money(this.rate);
+    }
+
+    public UIDocument getHUD()
+    {
+        return this.hud;
     }
 }
