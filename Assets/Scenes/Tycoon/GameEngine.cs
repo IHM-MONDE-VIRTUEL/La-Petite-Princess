@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class GameEngine : MonoBehaviour
 {
@@ -42,13 +43,18 @@ public class GameEngine : MonoBehaviour
     public int rateUnit;
 
     public TMP_Text bankText;
-    public TMP_Text walletText;
-    public TMP_Text rateText;
+
+    public UIDocument hud;
+    private Label walletTextElement;
+    private Label rateTextElement;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        this.walletTextElement = this.hud.rootVisualElement.Q<Label>("Amount");
+        this.rateTextElement = this.hud.rootVisualElement.Q<Label>("Rate");
+
         this.bank = new Money(this.bankAmount, this.bankUnit);
         this.wallet = new Money(this.walletAmount, this.walletUnit);
         this.rate = new Money(this.rateAmount, this.rateUnit);
@@ -85,11 +91,11 @@ public class GameEngine : MonoBehaviour
 
     public void updateWalletUI()
     {
-        if (this.walletText != null) this.walletText.text = this.wallet.ToString();
+        if (this.walletTextElement != null) this.walletTextElement.text = this.wallet.ToString();
     }
 
     public void updateRateUI()
     {
-        if (this.rateText != null) this.rateText.text = this.rate.ToString() + "/s";
+        if (this.rateTextElement != null) this.rateTextElement.text = this.rate.ToString() + "/s";
     }
 }
