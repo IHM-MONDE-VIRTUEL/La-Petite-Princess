@@ -22,9 +22,6 @@ public class Money
 
     public Money(double value, int unit)
     {
-        if (unit < 0) throw new ArgumentOutOfRangeException("unit", "Unit must be positive");
-        if (value < 0) throw new ArgumentOutOfRangeException("value", "Value must be positive");
-
         this.value = value;
         this.unit = unit;
 
@@ -46,7 +43,7 @@ public class Money
         if (this.value >= Money.unitDiff) this.value = Money.unitDiff - 1;
     }
 
-    public double GetValue()
+    public double Getvalue()
     {
         return value;
     }
@@ -63,6 +60,7 @@ public class Money
 
     public static Money operator +(Money a, Money b)
     {
+        if (a == null || b == null) throw new ArgumentNullException();
         if (a.unit == b.unit)
         {
             return new Money(a.value + b.value, a.unit);
@@ -79,6 +77,7 @@ public class Money
 
     public static Money operator -(Money a, Money b)
     {
+        if (a == null || b == null) throw new ArgumentNullException();
         if (a.unit == b.unit)
         {
             return new Money(a.value - b.value, a.unit);
@@ -95,17 +94,43 @@ public class Money
 
     public static Money operator *(Money a, double b)
     {
+        if (a == null) throw new ArgumentNullException();
         return new Money(a.value * b, a.unit);
     }
 
     public static Money operator *(double a, Money b)
     {
+        if (b == null) throw new ArgumentNullException();
         return new Money(a * b.value, b.unit);
     }
 
     public static Money operator /(Money a, double b)
     {
+        if (b == 0) throw new DivideByZeroException();
+        if (a == null) throw new ArgumentNullException();
         return new Money(a.value / b, a.unit);
+    }
+
+    public static double operator /(Money a, Money b)
+    {
+        if (a == null || b == null) throw new ArgumentNullException();
+        if (b.value == 0) throw new DivideByZeroException();
+        if (a.unit == b.unit)
+        {
+            return a.value / b.value;
+        }
+        else
+        {
+            double valueRatio = Math.Pow(Money.unitDiff, Math.Abs(a.unit - b.unit));
+            if (a.unit > b.unit)
+            {
+                return (a.value * valueRatio) / b.value;
+            }
+            else
+            {
+                return a.value / (b.value * valueRatio);
+            }
+        }
     }
 
     public static bool operator ==(Money a, Money b)

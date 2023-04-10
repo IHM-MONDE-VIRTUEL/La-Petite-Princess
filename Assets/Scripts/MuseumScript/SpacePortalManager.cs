@@ -44,7 +44,7 @@ public class SpacePortalManager : MonoBehaviour
         {
             // Load the next scene
             Debug.Log("Triggerrr");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("Tycoon");
         }
     }
     

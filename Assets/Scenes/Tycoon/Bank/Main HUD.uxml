@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:ProgressBar value="22" focusable="false" name="Target" style="margin-bottom: 3%; -unity-background-image-tint-color: rgb(255, 255, 255); margin-left: 5%; margin-right: 5%; margin-top: 2%;" />
+    <ui:GroupBox style="justify-content: space-between; height: auto; margin-left: 3px; padding-left: 0; padding-top: 5px; padding-bottom: 5px;">
+        <ui:VisualElement style="background-color: rgba(255, 255, 255, 0); flex-direction: row; flex-grow: 0; margin-bottom: 5px;">
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0.59); border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; height: auto; width: auto; overflow: hidden; align-items: center; justify-content: center; flex-direction: row; flex-grow: 0; max-width: 30%; min-width: 15%; flex-basis: auto;">
+                <ui:Label text="Rate:" display-tooltip-when-elided="true" name="RateLabel" style="height: auto; width: auto; align-items: auto; justify-content: flex-start; -unity-text-align: middle-center; font-size: 15px; color: rgb(255, 255, 255); flex-shrink: 1; padding-left: 0; padding-right: 0; padding-top: 15px; padding-bottom: 15px; margin-right: 10px; margin-left: 10px; -unity-font-style: italic;" />
+                <ui:Label text="0€/s" display-tooltip-when-elided="true" name="Rate" style="height: auto; width: auto; white-space: nowrap; flex-grow: 1; font-size: 15px; -unity-text-align: middle-left; justify-content: flex-start; align-items: auto; color: rgb(255, 255, 255); flex-direction: row; flex-wrap: nowrap; max-width: 100%; min-width: 0; padding-left: 5px; padding-right: 5px; padding-top: 15px; padding-bottom: 15px; -unity-font-style: bold;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="background-color: rgba(255, 255, 255, 0); flex-direction: row; flex-grow: 0; margin-top: 5px;">
+            <ui:VisualElement style="background-color: rgba(0, 0, 0, 0.59); border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; height: auto; width: auto; overflow: hidden; align-items: center; justify-content: center; flex-direction: row; flex-grow: 0; max-width: 30%; min-width: 15%; flex-basis: auto;">
+                <ui:Label text="Amount:" display-tooltip-when-elided="true" name="AmountLabel" style="height: auto; width: auto; align-items: auto; justify-content: flex-start; -unity-text-align: middle-center; font-size: 15px; color: rgb(255, 255, 255); flex-shrink: 1; padding-left: 0; padding-right: 0; padding-top: 15px; padding-bottom: 15px; margin-right: 10px; margin-left: 10px; -unity-font-style: italic;" />
+                <ui:Label text="0€" display-tooltip-when-elided="true" name="Amount" style="height: auto; width: auto; white-space: nowrap; flex-grow: 1; font-size: 15px; -unity-text-align: middle-left; justify-content: flex-start; align-items: auto; color: rgb(255, 255, 255); flex-direction: row; flex-wrap: nowrap; max-width: 100%; min-width: 0; padding-left: 5px; padding-right: 5px; padding-top: 15px; padding-bottom: 15px; -unity-font-style: bold;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:GroupBox>
+</ui:UXML>
