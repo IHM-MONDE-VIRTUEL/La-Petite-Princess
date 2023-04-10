@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 using StarterAssets;
+using UnityEditor;
 
 
 public class Upgrade : MonoBehaviour
@@ -11,7 +13,8 @@ public class Upgrade : MonoBehaviour
 
     [Tooltip("The upgrade HUD")]
     public UIDocument hud;
-    private Button buyButton;
+
+    public VisualTreeAsset upgradeUXML;
 
     [Tooltip("Player")]
     public ThirdPersonController player;
@@ -36,10 +39,42 @@ public class Upgrade : MonoBehaviour
         // Disable player movement and camera movement
         this.player.LockCameraPosition = true;
 
-        // Set buy button click event
-        this.buyButton = this.hud.rootVisualElement.Q<Button>("Buy");
+        var listView = this.hud.rootVisualElement.Q<ListView>("UpgradeList");
 
-        this.buyButton.clickable.clicked += this.upgrades.buy;
+        listView.makeItem = () =>
+        {
+            VisualElement upgradeElement = this.upgradeUXML.Instantiate();
+
+            upgradeElement.Q<Button>("Once").clickable.clicked += () =>
+            {
+                this.upgrades.Buy(upgradeElement.Q<Label>("Name").text, UpdateUpgradeList);
+            };
+
+            upgradeElement.Q<Button>("Max").clickable.clicked += () =>
+            {
+                this.upgrades.MaxBuy(upgradeElement.Q<Label>("Name").text, UpdateUpgradeList);
+            };
+
+            return upgradeElement;
+        };
+
+        listView.bindItem = (element, index) =>
+        {
+            Debug.Log("Binding " + index);
+            KeyValuePair<string, int> upgrade = this.upgrades.getUpgrades().ElementAt(index);
+
+            element.Q<Label>("Name").text = upgrade.Key;
+
+            float progress = (float) upgrade.Value / (float) this.upgrades.upgradeLevelsCount * 100;
+            element.Q<ProgressBar>("Progress").value = progress;
+            element.Q<ProgressBar>("Progress").title = progress + "%";
+
+            Debug.Log("Progress: " + progress);
+        };
+
+        listView.itemsSource = this.upgrades.upgradeNames;
+        listView.selectionType = SelectionType.None;
+        listView.Rebuild();
     }
 
     void OnTriggerExit(Collider other)
@@ -55,5 +90,12 @@ public class Upgrade : MonoBehaviour
 
         // Enable player movement and camera movement
         this.player.LockCameraPosition = false;
+    }
+
+    void UpdateUpgradeList()
+    {
+        var listView = this.hud.rootVisualElement.Q<ListView>("UpgradeList");
+        listView.itemsSource = this.upgrades.upgradeNames;
+        listView.Rebuild();
     }
 }

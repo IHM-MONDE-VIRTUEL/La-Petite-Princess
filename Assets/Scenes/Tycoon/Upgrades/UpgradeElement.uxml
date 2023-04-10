@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="width: 100%; height: auto; flex-direction: row; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; justify-content: flex-start; align-items: center;">
+        <ui:Label text="Upgrade" display-tooltip-when-elided="true" name="Name" style="-unity-text-align: middle-center; align-items: auto;" />
+        <ui:ProgressBar value="22" name="Progress" style="flex-grow: 1; margin-left: 10px; margin-right: 10px; flex-shrink: 1;" />
+        <ui:Button text="Once" display-tooltip-when-elided="true" name="Once" style="align-items: auto; justify-content: flex-start;" />
+        <ui:Button text="Max" display-tooltip-when-elided="true" name="Max" style="align-items: auto;" />
+    </ui:VisualElement>
+</ui:UXML>
