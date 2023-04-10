@@ -79,7 +79,8 @@ public class Upgrades : MonoBehaviour
 
     public void MaxBuy(string upgradeName, Action update)
     {
-        while (this.upgradeLevels[upgradeName] < this.upgradeLevelsCount)
+        int index = this.upgradeIndex;
+        while (this.upgradeLevels[upgradeName] < this.upgradeLevelsCount && index == this.upgradeIndex)
         {
             this.Buy(upgradeName, update);
         }
