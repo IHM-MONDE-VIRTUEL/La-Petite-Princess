@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bank : MonoBehaviour
 {
+    [Tooltip("The game engine")]
     public GameEngine gameEngine;
     private int frameCount = 0;
 
