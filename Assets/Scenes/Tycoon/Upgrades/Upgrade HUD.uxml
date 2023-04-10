@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="background-color: rgba(0, 0, 0, 0.6); height: 100%; width: 100%; align-items: center; justify-content: center;">
+        <ui:VisualElement style="width: 50%; height: 50%; align-items: auto; justify-content: flex-start; background-color: rgb(53, 54, 65); border-top-left-radius: 15px; border-bottom-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); font-size: 15px;">
+            <ui:VisualElement style="width: 100%; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
+                <ui:Label text="Upgrades" display-tooltip-when-elided="true" style="font-size: 25px; -unity-font-style: bold; -unity-text-align: upper-center; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 15px; border-top-right-radius: 15px; background-color: rgb(115, 117, 141); border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); overflow: visible; width: 100%; color: rgb(92, 186, 156);" />
+            </ui:VisualElement>
+            <ui:VisualElement style="width: 100%; height: auto; flex-direction: row; padding-left: 15px; padding-right: 15px; padding-top: 15px; padding-bottom: 15px; justify-content: space-between;">
+                <ui:Label text="Engine" display-tooltip-when-elided="true" />
+                <ui:ProgressBar value="22" style="flex-grow: 1; margin-left: 10px; margin-right: 10px;" />
+                <ui:Button text="Buy" display-tooltip-when-elided="true" name="Buy" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
