@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class SpacePortalManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -13,6 +14,9 @@ public class SpacePortalManager : MonoBehaviour
     public MeshRenderer portalMeshRenderer1;
     public MeshRenderer portalMeshRenderer2;
     private BoxCollider portalBoxCollider;
+    public AudioSource portalSound;
+    public LvlLoader lvlLoader;
+
     
     void Start()
     {
@@ -34,6 +38,7 @@ public class SpacePortalManager : MonoBehaviour
         portalMeshRenderer2.enabled = true;
         portalBoxCollider.enabled = true;
         portalBoxCollider.isTrigger = true;
+        portalSound.Play();
         
         Debug.Log("Portal is now active! and triggered");
      }
@@ -43,14 +48,12 @@ public class SpacePortalManager : MonoBehaviour
         if (allTriggersVisited && other.gameObject.tag == "Player")
         {
             // Load the next scene
-            Debug.Log("Triggerrr");
-            SceneManager.LoadScene("Tycoon");
+            lvlLoader.LoadNextLevel();
         }
     }
     
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+   
+    
+
 }

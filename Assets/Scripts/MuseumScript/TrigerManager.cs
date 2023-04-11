@@ -15,12 +15,15 @@ public class TrigerManager : MonoBehaviour
     private int trigersActivated = 0;
     public UIManager ui;
     public UnityEvent onAllTriggersVisited; // new event to represent all triggers being visited
+    public List<AudioSource> audioSources = new List<AudioSource>();
+    private int audioIndex = 0;
+
 
     
     void Start()
     {
         ListenToTrigers(true); 
-        ui.UpdateQuestText("Find the mysteries from earth ! " + trigersActivated + " / " + totalTrigers);
+        ui.UpdateQuestText("Find the mysteries from earth " + trigersActivated + " / " + totalTrigers);
           
     }
     
@@ -70,17 +73,20 @@ public class TrigerManager : MonoBehaviour
         trigersActivated++;
         ui.UpdateQuestText("Find the mysteries from earth ! " + trigersActivated + " / " + totalTrigers);
         CheckQuestStatus();
+        if(audioIndex < audioSources.Count) 
+            audioSources[audioIndex++].Play();
+        
     }
 }
 
 
-void CheckQuestStatus()
+void CheckQuestStatus() 
     {
         if (trigersActivated == totalTrigers)
         {
             ListenToTrigers(false);
             ui.UpdateQuestText(
-                "You're the chosen one, find the portal that will take you to a knowledgeable pilot from earth !"
+                "You're the chosen one ! Now find the portal that will take you to a pilot that know the way to earth"
             );
             onAllTriggersVisited.Invoke();
 
