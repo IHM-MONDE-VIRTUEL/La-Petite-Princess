@@ -15,15 +15,6 @@ public class GameEngine : MonoBehaviour
     private Money wallet;
     private Money rate;
 
-    [Header("Target Amount")]
-    [Tooltip("The amount of money to reach.")]
-    [Range(0, 999)]
-    public int targetAmount;
-
-    [Tooltip("The unit of the amount of money to reach.")]
-    [Range(0, 100)]
-    public int targetUnit;
-
     [Header("Bank Amount")]
     [Tooltip("The amount of money in the bank.")]
     [Range(0, 999)]
@@ -53,35 +44,46 @@ public class GameEngine : MonoBehaviour
     [Range(0, 100)]
     public int rateUnit;
 
+
+    [Header("Target Amount")]
+    [Tooltip("The amount of money to reach.")]
+    [Range(0, 999)]
+    public int targetAmount;
+
+    [Tooltip("The unit of the amount of money to reach.")]
+    [Range(0, 100)]
+    public int targetUnit;
+
+
+    [Header("Difficulty Rate")]
+    [Tooltip("Upgrade cost multiplier.")]
+    [Range(1, 2)]
+    public double upgradeCostMultiplier;
+
+    [Tooltip("Upgrade rate multiplier.")]
+    [Range(1, 100)]
+    public double upgradeRateMultiplier;
+
+
     public TMP_Text bankText;
 
     public UIDocument hud;
     private Label walletTextElement;
     private Label rateTextElement;
-    private ProgressBar progressBar;
-
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
 
         this.walletTextElement = this.hud.rootVisualElement.Q<Label>("Amount");
         this.rateTextElement = this.hud.rootVisualElement.Q<Label>("Rate");
-        this.progressBar = this.hud.rootVisualElement.Q<ProgressBar>("Target");
 
         this.target = new Money(this.targetAmount, this.targetUnit);
         this.bank = new Money(this.bankAmount, this.bankUnit);
         this.wallet = new Money(this.walletAmount, this.walletUnit);
         this.rate = new Money(this.rateAmount, this.rateUnit);
-
-        if (this.target == new Money()) this.progressBar.style.display = DisplayStyle.None;
-        else
-        {
-            this.progressBar.title = this.wallet.ToString() + " / " + this.target.ToString();
-            this.progressBar.value = 0;
-        }
 
         this.updateBankUI();
         this.updateWalletUI();
@@ -116,19 +118,6 @@ public class GameEngine : MonoBehaviour
     public void updateWalletUI()
     {
         this.walletTextElement.text = this.wallet.ToString();
-        if (this.target != new Money() && this.wallet > new Money())
-        {
-            this.progressBar.title = this.wallet.ToString() + " / " + this.target.ToString();
-
-            float value = 0;
-            if (this.wallet >= this.target) value = 1;
-            else
-            {
-                value = (float)(this.wallet / this.target);
-                if (value == float.PositiveInfinity || value < 0) value = 0;
-            }
-            this.progressBar.value = value * 100;
-        }
     }
 
     public void updateRateUI()
@@ -159,5 +148,16 @@ public class GameEngine : MonoBehaviour
     public UIDocument getHUD()
     {
         return this.hud;
+    }
+
+    public bool spend(Money money)
+    {
+        if (this.wallet < money) return false;
+        this.wallet -= money;
+        this.rate += money / this.upgradeRateMultiplier;
+
+        this.updateWalletUI();
+        this.updateRateUI();
+        return true;
     }
 }

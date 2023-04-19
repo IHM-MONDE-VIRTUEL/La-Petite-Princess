@@ -5,9 +5,23 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System;
 using StarterAssets;
+using UnityEngine.SceneManagement;
 
 public class Upgrades : MonoBehaviour
 {
+    [Header("Game Engine")]
+    [Tooltip("The game engine to get the money from.")]
+    public GameEngine gameEngine;
+
+    [Tooltip("Starting price for upgrades.")]
+    [Range(0, 999)]
+    public int startingPrice;
+
+    [Tooltip("Starting price unit for upgrades.")]
+    [Range(0, 100)]
+    public int startingPriceUnit;
+
+
     [Header("Upgrades")]
     [Tooltip("The list of upgrade objects.")]
     public List<GameObject> upgrades;
@@ -41,7 +55,7 @@ public class Upgrades : MonoBehaviour
         }
     }
 
-    public void UpgradeObject()
+    public void UpgradeLevel()
     {
         if (this.upgradeIndex < this.upgrades.Count - 1)
         {
@@ -59,22 +73,34 @@ public class Upgrades : MonoBehaviour
             this.upgradeIndex++;
             if (this.upgradeIndex > 0) this.upgrades[this.upgradeIndex - 1].SetActive(false);
             this.upgrades[this.upgradeIndex].SetActive(true);
+
+            this.upgradeLevelsCount += 10;
         }
     }
 
-    public void Buy(string upgradeName, Action update)
+    public bool Buy(string upgradeName, Action update)
     {
+        // Check if user has enough money to buy upgrade
+        if (!this.gameEngine.spend(this.getPrice(upgradeName))) return false;
+
+        // Upgrade if not maxed
         if (this.upgradeLevels[upgradeName] < this.upgradeLevelsCount) this.upgradeLevels[upgradeName]++;
 
         // if all upgrades are bought, upgrade the object
-        if (this.upgradeLevels.Values.All(level => level == this.upgradeLevelsCount) && this.upgradeIndex < this.upgrades.Count - 1)
+        if (this.upgradeLevels.Values.All(level => level == this.upgradeLevelsCount))
         {
-            // reset upgrade levels
-            this.upgradeLevels.Keys.ToList().ForEach(key => this.upgradeLevels[key] = 0);
-            this.UpgradeObject();
+            if (this.gameObject.name == "Space Ship") SceneManager.LoadScene("Main Menu");
+            if (this.upgradeIndex < this.upgrades.Count - 1)
+            {
+                // reset upgrade levels
+                this.upgradeLevels.Keys.ToList().ForEach(key => this.upgradeLevels[key] = 0);
+                this.UpgradeLevel();
+            }
         }
 
+        // Refresh HUD
         update();
+        return true;
     }
 
     public void MaxBuy(string upgradeName, Action update)
@@ -82,12 +108,19 @@ public class Upgrades : MonoBehaviour
         int index = this.upgradeIndex;
         while (this.upgradeLevels[upgradeName] < this.upgradeLevelsCount && index == this.upgradeIndex)
         {
-            this.Buy(upgradeName, update);
+            if (!this.Buy(upgradeName, update)) break;
         }
     }
 
     public Dictionary<string, int> getUpgrades()
     {
         return this.upgradeLevels;
+    }
+
+    public Money getPrice(string upgradeName)
+    {
+        Money target = this.gameEngine.getTarget();
+        Money initial = new Money(this.startingPrice, this.startingPriceUnit);
+        return initial * (this.upgradeLevels[upgradeName] + 1) * (this.upgradeNames.IndexOf(upgradeName) + 1) * (this.upgradeIndex < 0 ? 1 : Math.Pow(10, this.upgradeIndex + 1) * this.gameEngine.upgradeCostMultiplier);
     }
 }

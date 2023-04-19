@@ -138,6 +138,9 @@ namespace StarterAssets
 
         private void Awake()
         {
+            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            UnityEngine.Cursor.visible = false;
+
             // get a reference to our main camera
             if (_mainCamera == null)
             {

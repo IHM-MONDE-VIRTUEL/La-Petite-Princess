@@ -60,16 +60,14 @@ public class Upgrade : MonoBehaviour
 
         listView.bindItem = (element, index) =>
         {
-            Debug.Log("Binding " + index);
             KeyValuePair<string, int> upgrade = this.upgrades.getUpgrades().ElementAt(index);
 
             element.Q<Label>("Name").text = upgrade.Key;
+            element.Q<Label>("Price").text = this.upgrades.getPrice(upgrade.Key).ToString();
 
             float progress = (float) upgrade.Value / (float) this.upgrades.upgradeLevelsCount * 100;
             element.Q<ProgressBar>("Progress").value = progress;
-            element.Q<ProgressBar>("Progress").title = progress + "%";
-
-            element.Q<Label>("Price").text = "0€";
+            element.Q<ProgressBar>("Progress").title = progress.ToString("0.##") + "%";
         };
 
         listView.itemsSource = this.upgrades.upgradeNames;

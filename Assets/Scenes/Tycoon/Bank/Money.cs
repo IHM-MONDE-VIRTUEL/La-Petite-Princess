@@ -34,7 +34,7 @@ public class Money
 
     private void Normalize()
     {
-        while (this.value < 1.0 / Money.unitDiff && this.unit > 0)
+        while (this.value < 1.0 && this.unit > 0)
         {
             this.value *= Money.unitDiff;
             this.unit--;
@@ -44,10 +44,10 @@ public class Money
             this.value /= Money.unitDiff;
             this.unit++;
         }
-        if (this.value >= Money.unitDiff) this.value = Money.unitDiff - 1;
+        if (this.unit >= Money.units.Length - 1 && this.value >= Money.unitDiff) this.value = Money.unitDiff - 1;
     }
 
-    public double Getvalue()
+    public double GetValue()
     {
         return value;
     }

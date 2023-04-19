@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.59); align-items: center; justify-content: center;">
+        <ui:VisualElement style="width: 75%; height: 75%; border-top-left-radius: 15px; border-bottom-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; background-color: rgb(255, 255, 255); padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px;">
+            <ui:VisualElement>
+                <ui:Label text="The Space Princess Journey" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; font-size: 64px; color: rgb(0, 0, 0); -unity-font-style: bold; white-space: normal;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; margin-left: 50px; margin-right: 50px; margin-top: 10px; margin-bottom: 0;">
+                <ui:Button text="Let&apos;s Play" display-tooltip-when-elided="true" name="All" style="flex-grow: 1; flex-shrink: 1; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+                <ui:Button text="Play Museum World" display-tooltip-when-elided="true" name="Museum" style="flex-shrink: 1; flex-grow: 1; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+                <ui:Button text="Play Crossy Roads" display-tooltip-when-elided="true" name="CrossyRoads" style="flex-shrink: 1; flex-grow: 1; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+                <ui:Button text="Play Earth Tycoon" display-tooltip-when-elided="true" name="Tycoon" style="flex-shrink: 1; flex-grow: 1; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
