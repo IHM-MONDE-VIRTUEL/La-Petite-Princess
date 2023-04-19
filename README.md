@@ -2,9 +2,20 @@
 
 ## Instructions
 
-Importez le projet dans Unity : *Assets > Import Package > Custom Package > Sélectionnez le fichier `La Petite Princess.unitypackage` > Import.*
+Importez le projet dans Unity : *Assets > Import Package > Custom Package > Sélectionnez le fichier `La Petite Princess.unitypackage` > Import.* Le fichier `La Petite Princess.unitypackage` se trouve [ici](./La%20Petite%20Princess.unitypackage)
+
+ou clonez le projet avec la commande suivante :
+
+    git clone https://github.com/IHM-MONDE-VIRTUEL/La-Petite-Princess.git
 
 Ouvrez la scène *Assets > Scenes > `Main Menu`*. Vous pouvez ensuite lancer le jeu en cliquant sur le bouton *Lets Play* pour lancer la totalité des niveaux ou sur le bouton *Play* X pour lancer le niveau X.
+
+Vous pouvez également ouvrir les scènes des niveaux individuellement : *Assets > Scenes*.
+![Scenes](./Images/Scenes.png)
+
+**Pour pouvoir jouer au jeu avec les niveaux qui s'enchainent**, il faut configuer l'ensemble des scenes. Il faut donc ouvrir les scènes dans l'ordre suivant : *Main Menu*, *Museum*, *Crossy Roads*, *Tycoon* et pour chaque scène, il faut ouvrir *File > Build Settings > Add Open Scenes* pour ajouter les scènes ouvertes dans la liste des scènes à charger au lancement du jeu.
+
+ou sinon lancer le jeu avec l'exécutable [*La Petite Princess.exe*](./Build/La%20Petite%20Princess.exe).
 
 ## Ressource Externe
 
