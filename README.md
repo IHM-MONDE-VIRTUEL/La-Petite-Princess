@@ -13,9 +13,9 @@ Ouvrez la scène *Assets > Scenes > `Main Menu`*. Vous pouvez ensuite lancer le 
 Vous pouvez également ouvrir les scènes des niveaux individuellement : *Assets > Scenes*.
 ![Scenes](./Images/Scenes.png)
 
-**Pour pouvoir jouer au jeu avec les niveaux qui s'enchainent**, il faut configuer l'ensemble des scenes. Il faut donc ouvrir les scènes dans l'ordre suivant : *Main Menu*, *Museum*, *Crossy Roads*, *Tycoon* et pour chaque scène, il faut ouvrir *File > Build Settings > Add Open Scenes* pour ajouter les scènes ouvertes dans la liste des scènes à charger au lancement du jeu.
+**Pour pouvoir jouer au jeu avec les niveaux qui s'enchainent**, il faut configuer l'ensemble des scenes. Il faut donc ouvrir les scènes dans l'ordre suivant : *Main Menu*, *Museum*, *Crossy Roads*, *Tycoon* et pour chaque scène, il faut ouvrir *File > Build Settings > Add Open Scenes* pour ajouter la scène ouverte dans la liste des scènes à charger au lancement du jeu.
 
-ou sinon lancer le jeu avec l'exécutable [*La Petite Princess.exe*](./Build/La%20Petite%20Princess.exe).
+ou sinon lancer le jeu avec l'exécutable [*Petite Princess.exe*](./Build/Petite%20Princess.exe).
 
 ## Ressource Externe
 
