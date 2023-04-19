@@ -2,6 +2,10 @@
 
 ## Instructions
 
+Importez le projet dans Unity : *Assets > Import Package > Custom Package > Sélectionnez le fichier `La Petite Princess.unitypackage` > Import.*
+
+Ouvrez la scène *Assets > Scenes > `Main Menu`*. Vous pouvez ensuite lancer le jeu en cliquant sur le bouton *Lets Play* pour lancer la totalité des niveaux ou sur le bouton *Play* X pour lancer le niveau X.
+
 ## Ressource Externe
 
 Nous avons utilisé les ressources suivantes pour réaliser ce projet :
